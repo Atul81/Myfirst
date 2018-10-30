@@ -1,0 +1,35 @@
+ public static List<String> findSchedules(int workHours, int dayHours, String pattern) {
+    // Write your code here
+    List<String> answer = new ArrayList<String>();
+        List<Integer> outcomes = new ArrayList<Integer>();
+        int leftWorkHours = 0;
+        in temp = 0;
+        int sum = 0;
+        Random r = new Random();
+        int cn = (int)pattern.chars().filter(ch -> ch == '?').count();
+        char[] chars = pattern.toCharArray();
+        int givenHrs = 0;
+        for(int i = 0; i < chars.length; i++) {
+            if(chars[i] != '?') {
+                givenHrs  = givenHrs + chars[i];
+            }
+        }
+        leftWorkHours = workHours - givenHrs;
+        for(int i = 0; i < cn; i++) {
+            temp = r.nextInt(leftWorkHours - sum);
+            if (temp < dayHours) {
+                outcomes.add(temp);
+                sum =+ temp;
+            }
+        }
+        int val = 0;
+        for(int t= 0 ; i < chars.length ; i++) {
+            if(pattern.charAt(i) == '?') {
+                pattern.charAt(i) = outcomes.get(val);
+                val++;
+            }
+        }
+        answer.add(pattern);
+    }
+
+}
